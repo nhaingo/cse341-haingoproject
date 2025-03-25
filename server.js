@@ -6,10 +6,10 @@ const mongodb = require('./data/database');
 const port = process.env.PORT||3000;
 const mongoose = require('mongoose');
 const cors = require('cors');
-//const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
