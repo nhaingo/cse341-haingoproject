@@ -7,7 +7,7 @@
   },
   "servers": [
     { 
-      "url": "https://cse341-haingoproject.onrender.com",
+      "url": "https://cse341-haingoproject-1.onrender.com",
       "description": "Production server"
     },
     {
