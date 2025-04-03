@@ -1,8 +1,8 @@
 const swaggerAutogen = require('swagger-autogen')();
 
 const  doc = {
-    title: 'contacts Api',
-    description: 'contacts Api'
+    title: 'drivers Api',
+    description: 'drivers Api'
 };
 
 const outputFile = './swagger.json';

@@ -1,9 +1,9 @@
 {
   "openapi": "3.0.0",
   "info": {
-    "title": "CSE341 Web Services API",
+    "title": "My Personal CSE341 Web Services API",
     "version": "1.0.0",
-    "description": "API documentation for CSE341 Web Services"
+    "description": "API documentation for my Personal CSE341 Web Services"
   },
   "servers": [
     { 
@@ -15,14 +15,28 @@
       "description": "Local server"
     }
   ],
+  "tags": [
+    {
+      "name": "drivers",
+      "description": "CRUD operations for drivers"
+    },
+    {
+      "name": "vehicles",
+      "description": "CRUD operations for vehicles"
+    }
+  ],
+
   "paths": {
-    "/temples": {
+    "/drivers": {
       "get": {
-        "summary": "Get all temples",
-        "description": "Fetches a list of all temples from the database.",
+        "tags":[
+          "drivers"
+        ],
+        "summary": "Get all drivers",
+        "description": "Fetches a list of all drivers from the database.",
         "responses": {
           "200": {
-            "description": "A list of temples."
+            "description": "A list of drivers."
           },
           "500": {
             "description": "Server error."
@@ -30,8 +44,11 @@
         }
       },
       "post": {
-        "summary": "Add a new temple",
-        "description": "Creates a new temple and adds it to the database.",
+        "tags":[
+          "drivers"
+        ],
+        "summary": "Add a new driver",
+        "description": "Creates a new driver and adds it to the database.",
         "requestBody": {
           "required": true,
           "content": {
@@ -40,13 +57,36 @@
                 "type": "object",
                 "required": ["name", "location"],
                 "properties": {
-                  "name": {
+                  "firstName": {
                     "type": "string",
-                    "description": "The name of the temple."
+                    "description": "The first name of the driver."
                   },
-                  "location": {
+                  "lastName": {
                     "type": "string",
-                    "description": "The location of the temple."
+                    "description": "The last name of the driver."
+                  },
+                  "phoneNumber": {
+                    "type": "string",
+                    "description": "The phone number of the driver.",
+                    "example": "(999)999-9999"
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "The address of the driver."
+                  },
+                  "licenseNumber": {
+                    "type": "string",
+                    "description": "The license number of the driver.",
+                    "example":"D890-1234-56 (Alpha-numeric: 6-12)"
+                  },
+                  "experienceYears": {
+                    "type": "number",
+                    "description": "The number of years of expericence of the driver."
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "The email address of the driver.",
+                    "example": "example@example.com"
                   }
                 }
               }
@@ -55,7 +95,7 @@
         },
         "responses": {
           "201": {
-            "description": "Temple successfully created."
+            "description": "driver successfully created."
           },
           "400": {
             "description": "Bad request."
@@ -66,14 +106,17 @@
         }
       }
     },
-    "/temples/{temple_id}": {
+    "/drivers/{_id}": {
       "get": {
-        "summary": "Get a specific temple",
-        "description": "Fetches details of a temple by its ID.",
+        "tags":[
+          "drivers"
+        ],
+        "summary": "Get a specific driver",
+        "description": "Fetches details of a driver by its ID.",
         "parameters": [
           {
             "in": "path",
-            "name": "temple_id",
+            "name": "_id",
             "required": true,
             "description": "The ID of the temple to retrieve.",
             "schema": {
@@ -83,10 +126,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Temple found."
+            "description": "Driver found."
           },
           "404": {
-            "description": "Temple not found."
+            "description": "Driver not found."
           },
           "500": {
             "description": "Server error."
@@ -94,14 +137,17 @@
         }
       },
       "put": {
-        "summary": "Update a temple",
-        "description": "Updates a temple's details.",
+        "tags":[
+          "drivers"
+        ],
+        "summary": "Update a driver",
+        "description": "Updates a driver's details.",
         "parameters": [
           {
             "in": "path",
-            "name": "temple_id",
+            "name": "_id",
             "required": true,
-            "description": "The ID of the temple to update.",
+            "description": "The ID of the driver to update.",
             "schema": {
               "type": "string"
             }
@@ -114,18 +160,35 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "name": {
+                  "firstName": {
                     "type": "string",
-                    "description": "The new name of the temple."
+                    "description": "The first name of the driver."
                   },
-                  "location": {
+                  "lastName": {
                     "type": "string",
-                    "description": "The new location of the temple."
+                    "description": "The last name of the driver."
                   },
-                  "dedicated": {
+                  "phoneNumber": {
                     "type": "string",
-                    "description": "The dedication date."
+                    "description": "The phone number of the driver."
+                  },
+                  "address": {
+                    "type": "string",
+                    "description": "The address of the driver."
+                  },
+                  "licenseNumber": {
+                    "type": "string",
+                    "description": "The license number of the driver."
+                  },
+                  "experienceYears": {
+                    "type": "number",
+                    "description": "The number of years of expericence of the driver."
+                  },
+                  "email": {
+                    "type": "string",
+                    "description": "The email address of the driver."
                   }
+                  
                 }
               }
             }
@@ -133,13 +196,13 @@
         },
         "responses": {
           "200": {
-            "description": "Temple successfully updated."
+            "description": "Driver successfully updated."
           },
           "400": {
             "description": "Bad request."
           },
           "404": {
-            "description": "Temple not found."
+            "description": "Driver not found."
           },
           "500": {
             "description": "Server error."
@@ -147,13 +210,16 @@
         }
       },
       "delete": {
-        "summary": "Delete a temple",
+        "tags":[
+          "drivers"
+        ],
+        "summary": "Delete a driver",
         "parameters": [
           {
             "in": "path",
-            "name": "temple_id",
+            "name": "_id",
             "required": true,
-            "description": "The ID of the temple to delete.",
+            "description": "The ID of the driver to delete.",
             "schema": {
               "type": "string"
             }
@@ -161,10 +227,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Temple successfully deleted."
+            "description": "Driver successfully deleted."
           },
           "404": {
-            "description": "Temple not found."
+            "description": "Driver not found."
           },
           "500": {
             "description": "Server error."
@@ -172,12 +238,15 @@
         }
       }
     },
-    "/contacts": {
+    "/vehicles": {
       "get": {
-        "summary": "Retrieve a list of contacts",
+        "tags":[
+          "vehicles"
+        ],
+        "summary": "Retrieve a list of vehicles",
         "responses": {
           "200": {
-            "description": "A list of contacts",
+            "description": "A list of vehicles",
             "content": {
               "application/json": {
                 "schema": {
@@ -192,7 +261,10 @@
         }
       },
       "post": {
-        "summary": "Create a new contact",
+        "tags":[
+          "vehicles"
+        ],
+        "summary": "Create a new vehicle",
         "requestBody": {
           "required": true,
           "content": {
@@ -200,20 +272,25 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "firstName": {
+                  "modelVehicle": {
                     "type": "string"
                   },
-                  "lastName": {
+                  "manufacturer": {
                     "type": "string"
                   },
-                  "email": {
+                  "yearVehicle": {
+                    "type": "number",
+                    "example": 1234
+                  },
+                  "horsePower": {
+                    "type": "number"
+                  },
+                  "licensePlate": {
                     "type": "string"
                   },
-                  "favoriteColor": {
-                    "type": "string"
-                  },
-                  "birthday": {
-                    "type": "string"
+                  "lastMaintenanceDate": {
+                      "type": "string",
+                      "example": "yyyy-mm-dd"
                   }
                 }
               }
@@ -222,7 +299,7 @@
         },
         "responses": {
           "201": {
-            "description": "Contact created successfully"
+            "description": "Vehicle created successfully"
           },
           "400": {
             "description": "Bad request"
@@ -230,15 +307,18 @@
         }
       }
     },
-    "/contacts/{id}": {
+    "/vehicles/{id}": {
       "get": {
-        "summary": "Retrieve a single contact",
+        "tags":[
+          "vehicles"
+        ],
+        "summary": "Retrieve a single vehicle",
         "parameters": [
           {
             "in": "path",
             "name": "id",
             "required": true,
-            "description": "ID of the contact to retrieve",
+            "description": "ID of the vehicle to retrieve",
             "schema": {
               "type": "string"
             }
@@ -246,7 +326,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A single contact",
+            "description": "A single vehicle",
             "content": {
               "application/json": {
                 "schema": {
@@ -256,18 +336,21 @@
             }
           },
           "404": {
-            "description": "Contact not found"
+            "description": "Vehicle not found"
           }
         }
       },
       "put": {
-        "summary": "Update a contact",
+        "tags":[
+          "vehicles"
+        ],
+        "summary": "Update a vehicle",
         "parameters": [
           {
             "in": "path",
             "name": "id",
             "required": true,
-            "description": "ID of the contact to update",
+            "description": "ID of the Vehicle to update",
             "schema": {
               "type": "string"
             }
@@ -280,20 +363,24 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "firstName": {
+                  "modelVehicle": {
                     "type": "string"
                   },
-                  "lastName": {
+                  "manufacturer": {
                     "type": "string"
                   },
-                  "email": {
+                  "yearVehicle": {
+                    "type": "number"
+                  },
+                  "horsePower": {
+                    "type": "number"
+                  },
+                  "licensePlate": {
                     "type": "string"
                   },
-                  "favoriteColor": {
-                    "type": "string"
-                  },
-                  "birthday": {
-                    "type": "string"
+                  "lastMaintenanceDate": {
+                      "type": "string",
+                      "example": "yyyy-mm-dd"
                   }
                 }
               }
@@ -302,24 +389,27 @@
         },
         "responses": {
           "200": {
-            "description": "Contact updated successfully"
+            "description": "Vehicle updated successfully"
           },
           "400": {
             "description": "Bad request"
           },
           "404": {
-            "description": "Contact not found"
+            "description": "Vehicle not found"
           }
         }
       },
       "delete": {
-        "summary": "Delete a contact",
+        "tags":[
+          "vehicles"
+        ],
+        "summary": "Delete a vehicle",
         "parameters": [
           {
             "in": "path",
             "name": "id",
             "required": true,
-            "description": "ID of the contact to delete",
+            "description": "ID of the vehicle to delete",
             "schema": {
               "type": "string"
             }
@@ -327,14 +417,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Contact deleted successfully"
+            "description": "Vehicle deleted successfully"
           },
           "404": {
-            "description": "Contact not found"
+            "description": "Vehicle not found"
           }
         }
       }
     }
-  },
-  "tags": []
+  }
 }
