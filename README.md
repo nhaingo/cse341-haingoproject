@@ -1,1 +1,1 @@
-This is a repository for CSE-341-project
+This is a repository for CSE-341-project for week 3 anf week 4 that include validation rules and authentication rules
