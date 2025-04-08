@@ -3,16 +3,17 @@ const router = express.Router();
 
 
 const driverController = require('../controllers/drivers');
-const validation = require('../middleware/validate')
+const { isAuthenticated } = require("../middleware/authenticate");
+const validation = require('../middleware/validate');
 
 router.get('/', driverController.getAll);
 
 router.get('/:id', driverController.getSingle);
 
-router.post('/', validation.saveDriver, driverController.createDriver);
+router.post('/', isAuthenticated, validation.saveDriver, driverController.createDriver);
 
-router.put('/:id', validation.saveDriver, driverController.updateDriver);
+router.put('/:id', isAuthenticated, validation.saveDriver, driverController.updateDriver);
 
-router.delete('/:id', driverController.deleteDriver);
+router.delete('/:id', isAuthenticated, driverController.deleteDriver);
 
 module.exports = router;
